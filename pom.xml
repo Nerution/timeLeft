@@ -96,7 +96,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.litit.timeleft/com.litit.timeleft.HelloApplication</mainClass>
+                            <mainClass>com.litit.timeleft/com.litit.timeleft.TimeLeftApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

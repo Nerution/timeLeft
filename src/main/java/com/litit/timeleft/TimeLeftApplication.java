@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
-public class HelloApplication extends Application {
+public class TimeLeftApplication extends Application {
     @Override
     public void start(Stage stage) {
         String dateString = FileIO.read();
