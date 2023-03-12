@@ -15,7 +15,7 @@ public class TimeLeftApplication extends Application {
             getDateFromFile(dateString);
             return;
         }
-        TemplateCreator.create(HelloController.class, "hello-view.fxml");
+        TemplateCreator.create(MainController.class, "main-view.fxml");
         stage = TemplateCreator.stage;
         stage.sizeToScene();
         stage.show();

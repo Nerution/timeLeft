@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 
-public class SettingsController implements AbstractController {
+public class SettingsController {
     public static final String ERROR_MESSAGE = "Wrong date! Please choose one more";
     public static final String CALCULATING = "CALCULATING!";
     private static double xOffset = 0;
@@ -46,8 +46,8 @@ public class SettingsController implements AbstractController {
     }
 
     public static void startTicking(Event event, LocalDate pickedDate) {
-        Pair<HelloController, Stage> controllerStagePair = changeView(event);
-        HelloController helloController = controllerStagePair.getKey();
+        Pair<MainController, Stage> controllerStagePair = changeView(event);
+        MainController mainController = controllerStagePair.getKey();
         Stage stage = controllerStagePair.getValue();
         Timeline timeline = new Timeline(
                 new KeyFrame(
@@ -58,7 +58,7 @@ public class SettingsController implements AbstractController {
                                     LocalDateTime.now(),
                                     pickedDate.atStartOfDay().minusDays(1)
                             );
-                            helloController.setWelcomeText(
+                            mainController.setWelcomeText(
                                     String.format("%s years, %s months, %s days, %s hours, %s minutes, %s seconds",
                                             timeLeftPeriod.getYears(),
                                             timeLeftPeriod.getMonths(),
@@ -74,16 +74,16 @@ public class SettingsController implements AbstractController {
         timeline.play();
     }
 
-    private static Pair<HelloController, Stage> changeView(Event event) {
+    private static Pair<MainController, Stage> changeView(Event event) {
         if (event != null) {
             ((Node) event.getSource()).getScene().getWindow().hide();
         }
-        TemplateCreator.create(HelloController.class, "hello-view.fxml");
-        HelloController helloController = TemplateCreator.loader.getController();
-        helloController.setWelcomeText(CALCULATING);
+        TemplateCreator.create(MainController.class, "main-view.fxml");
+        MainController mainController = TemplateCreator.loader.getController();
+        mainController.setWelcomeText(CALCULATING);
         Stage stage = TemplateCreator.stage;
         stage.sizeToScene();
         stage.show();
-        return new Pair<>(helloController, stage);
+        return new Pair<>(mainController, stage);
     }
 }
