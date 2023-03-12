@@ -2,6 +2,7 @@ package com.litit.timeleft.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,6 +26,7 @@ public class TemplateCreator {
             localStage = new Stage();
             localStage.initStyle(StageStyle.TRANSPARENT);
             setMouseEvents(scene, localStage);
+            localStage.getIcons().add(new Image("file:src/main/resources/com/litit/timeleft/wall-clock.png"));
             localStage.setScene(scene);
             localStage.setAlwaysOnTop(true);
         } catch (IOException e) {
