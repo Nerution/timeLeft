@@ -7,14 +7,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <VBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.litit.timeleft.SettingsController">
+      fx:controller="com.litit.timeleft.SettingsController"
+      style="-fx-background-color: rgba(0, 100, 100, 0.2); -fx-background-radius: 10;">
     <HBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
         </padding>
-        <Label text="End date:" />
-        <DatePicker fx:id="datePicker" />
-        <FontIcon iconLiteral="fas-check-circle" iconSize="20" onMouseClicked="#passDate"/>
+        <Label text="End date:" textFill="white"/>
+        <DatePicker fx:id="datePicker"/>
+        <FontIcon iconLiteral="fas-check-circle" iconSize="20" iconColor="white" onMouseClicked="#passDate"/>
     </HBox>
     <Label fx:id="errorLabel" visible="false" textFill="red" style="-fx-padding: -15 0 0 0;"/>
 </VBox>
