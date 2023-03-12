@@ -4,9 +4,11 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,31 +23,10 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class HelloController {
 
     @FXML
     private Label welcomeText;
-
-    private void init(LocalDateTime endDate) {
-        welcomeText.setText(
-                String.format("%s years, %s months, %s days, %s hours, %s minutes, %s seconds", 0, 0, 0, 0, 0, 0)
-        );
-        Timeline timeline = new Timeline(
-                new KeyFrame(
-                        javafx.util.Duration.millis(1000),
-                        event -> {
-                            Period timeLeftPeriod = Period.between(LocalDate.now(), endDate.toLocalDate());
-                            Duration timeLeftDuration = Duration.between(LocalDateTime.now(), endDate);
-                            welcomeText.setText(
-                                    String.format("%s years, %s months, %s days, %s hours, %s minutes, %s seconds",
-                                            timeLeftPeriod.getYears(), timeLeftPeriod.getMonths(), timeLeftPeriod.getDays(),
-                                            timeLeftDuration.toHoursPart(), timeLeftDuration.toMinutesPart(), timeLeftDuration.toSecondsPart())
-                            );
-                        }
-                ));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
 
     @FXML
     public void closeApp() {
@@ -53,12 +34,14 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    public void settings() {
+    public void settings(Event event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("settings-view.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 100);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 100);
             Stage stage = new Stage();
+//            stage.setOpacity(0.1);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
@@ -67,13 +50,7 @@ public class HelloController implements Initializable {
         }
     }
 
-    public void setEndDate(LocalDate endDate) {
-        init(endDate.atStartOfDay());
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        LocalDateTime endDate = LocalDateTime.of(1994, 1, 5, 0, 0).plusYears(35);
-        init(endDate);
+    public void setWelcomeText(String text){
+        welcomeText.setText(text);
     }
 }
