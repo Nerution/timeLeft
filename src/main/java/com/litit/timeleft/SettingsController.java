@@ -1,5 +1,6 @@
 package com.litit.timeleft;
 
+import com.litit.timeleft.utils.FileIO;
 import com.litit.timeleft.utils.TemplateCreator;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -41,9 +42,10 @@ public class SettingsController implements AbstractController {
         }
 
         startTicking(event, pickedDate);
+        FileIO.write(pickedDate.toString());
     }
 
-    private static void startTicking(Event event, LocalDate pickedDate) {
+    public static void startTicking(Event event, LocalDate pickedDate) {
         Pair<HelloController, Stage> controllerStagePair = changeView(event);
         HelloController helloController = controllerStagePair.getKey();
         Stage stage = controllerStagePair.getValue();
@@ -73,7 +75,9 @@ public class SettingsController implements AbstractController {
     }
 
     private static Pair<HelloController, Stage> changeView(Event event) {
-        ((Node) event.getSource()).getScene().getWindow().hide();
+        if (event != null) {
+            ((Node) event.getSource()).getScene().getWindow().hide();
+        }
         TemplateCreator.create(HelloController.class, "hello-view.fxml");
         HelloController helloController = TemplateCreator.loader.getController();
         helloController.setWelcomeText(CALCULATING);
